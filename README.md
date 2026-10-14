@@ -1,21 +1,136 @@
-# Power BI Task 5
+# 🏥 Healthcare Data Cleaning & Star Schema Modelling using Power BI
 
-## Project Overview
-This repository contains **`PBI_Task5.pbix`**, a Microsoft Power BI report file. The report can be opened in Power BI Desktop to explore its pages, visuals, filters, and available data.
+## 📌 Project Overview
 
-## File Included
-- `PBI_Task5.pbix` — Power BI report file.
+This project focuses on cleaning healthcare data and building a **Star Schema Data Model** using Microsoft Power BI. It uses Power Query Editor to clean and transform healthcare records and creates dimension tables and a fact table for clinical data analysis.
 
-## Tools Required
-- Microsoft Power BI Desktop
-- Any data sources or credentials required by the report, if prompted
+The project prepares structured healthcare data for reporting, visualization, and analytical purposes.
 
-## How to Open
-1. Download or copy `PBI_Task5.pbix` to your computer.
-2. Install and open **Microsoft Power BI Desktop**.
-3. Select **File → Open report** (or use **Open** from the start screen).
-4. Choose `PBI_Task5.pbix`.
-5. If Power BI prompts you to sign in, refresh data, or provide data-source credentials, follow the prompts as appropriate.
-6. Use the report pages, filters, slicers, and visuals to explore the report.
+## 🎯 Objectives
 
-<img width="665" height="322" alt="Screenshot 2026-10-14 145902" src="https://github.com/user-attachments/assets/21e618b7-95bb-4b57-aace-e841d03df8c4" />
+- Clean and transform healthcare datasets using Power Query.
+- Correct data types and standardize text values.
+- Remove exact duplicate records.
+- Categorize patients into age groups.
+- Create dimension tables for patients, doctors, hospitals, and dates.
+- Build a central FactAdmission table.
+- Establish relationships using a Star Schema model.
+
+## 🛠️ Technologies Used
+
+- **Microsoft Power BI Desktop**
+- **Power Query Editor**
+- **Power BI Model View**
+- **CSV Dataset**
+
+## 📂 Dataset Information
+
+- **Dataset:** `healthcare_dataset(2).csv`
+- **Original Records:** 55,500 rows
+- **Columns:** 15
+
+### Dataset Columns
+
+- Name
+- Age
+- Gender
+- Blood Type
+- Medical Condition
+- Date of Admission
+- Doctor
+- Hospital
+- Insurance Provider
+- Billing Amount
+- Room Number
+- Admission Type
+- Discharge Date
+- Medication
+- Test Results
+
+## 🧹 Data Cleaning and Transformation
+
+The following operations were performed in Power Query:
+
+1. Loaded the healthcare CSV dataset.
+2. Renamed the base query to `Healthcare_Cleaned`.
+3. Assigned appropriate data types to all columns.
+4. Applied Trim and Clean operations to text columns.
+5. Standardized patient names using Capitalize Each Word.
+6. Removed 534 exact duplicate records.
+7. Created an `AgeGroup` column.
+8. Standardized admission types as Emergency, Elective, and Urgent.
+
+### Age Group Categories
+
+| Age Range | Category |
+|---|---|
+| 0–17 | Pediatric |
+| 18–39 | Young Adult |
+| 40–59 | Middle Adult |
+| 60 and above | Senior |
+
+## ⭐ Star Schema Data Model
+
+The project contains six tables:
+
+| Table Name | Purpose |
+|---|---|
+| `Healthcare_Cleaned` | Cleaned base dataset |
+| `DimPatient` | Patient details and PatientID |
+| `DimDoctor` | Doctor details and DoctorID |
+| `DimHospital` | Hospital details and HospitalID |
+| `DimDate` | Date, year, month, month number, and quarter |
+| `FactAdmission` | Admission records and measurable details |
+
+### Model Relationships
+
+The `FactAdmission` table is connected to four dimension tables.
+
+- `DimPatient[PatientID]` → `FactAdmission[PatientID]`
+- `DimDoctor[DoctorID]` → `FactAdmission[DoctorID]`
+- `DimHospital[HospitalID]` → `FactAdmission[HospitalID]`
+- `DimDate[Date]` → `FactAdmission[Date of Admission]`
+
+All four relationships use **one-to-many (1:*) cardinality** and single-direction cross-filtering.
+
+## 📊 Key Features
+
+- Healthcare data cleaning and preprocessing
+- Duplicate record removal
+- Patient demographic categorization
+- Standardized admission types
+- Surrogate key generation
+- Fact and dimension table creation
+- Star Schema modelling
+- Date dimension with year, month, and quarter
+- Data model preparation for clinical analytics
+
+## 🚀 How to Run the Project
+
+1. Install and open Microsoft Power BI Desktop.
+2. Download or obtain the healthcare CSV dataset.
+3. Open Power BI Desktop.
+4. Select **Home → Get Data → Text/CSV**.
+5. Import `healthcare_dataset(2).csv`.
+6. Select **Transform Data** to open Power Query Editor.
+7. Follow the data cleaning and transformation steps.
+8. Create the dimension tables and `FactAdmission`.
+9. Create `DimDate` using Power Query Advanced Editor.
+10. Select **Close & Apply**.
+11. Open Model View and configure the four relationships.
+12. Verify the final Star Schema.
+
+## 📈 Expected Outcome
+
+A cleaned healthcare data model with patient, doctor, hospital, and date dimensions connected to a central admission fact table. The model is structured to support future Power BI reports and clinical data analysis.
+
+## 🎓 Learning Outcomes
+
+- Understanding data cleaning with Power Query
+- Working with healthcare datasets
+- Creating dimension and fact tables
+- Generating surrogate keys
+- Understanding Star Schema architecture
+- Creating and managing Power BI relationships
+
+**<img width="665" height="322" alt="Screenshot 2026-10-14 145902" src="https://github.com/user-attachments/assets/21e618b7-95bb-4b57-aace-e841d03df8c4" />
